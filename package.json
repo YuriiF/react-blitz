@@ -1,0 +1,26 @@
+{
+  "name": "react-blitz",
+  "version": "1.0.0",
+  "description": "Simply fast react boilerplate",
+  "repository": {
+    "url": "git@github.com:YuriiF/react-blitz.git",
+    "type": "git"
+  },
+  "engines": {
+    "npm": ">=5",
+    "node": ">=8.10.0"
+  },
+  "author": "Yurii Fotul",
+  "license": "MIT",
+  "scripts": {
+    "start": "echo hello",
+    "build": "",
+    "test": "",
+    "lint": ""
+  },
+  "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
