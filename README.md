@@ -1,2 +1,2 @@
 # react-blitz
-My personal react boilerplate - not production ready - WIP
+My personal react boilerplate - not production ready - *WIP*
