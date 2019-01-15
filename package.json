@@ -13,14 +13,19 @@
   "author": "Yurii Fotul",
   "license": "MIT",
   "scripts": {
-    "start": "echo hello",
-    "build": "",
-    "test": "",
-    "lint": ""
+    "start": "echo start",
+    "build": "echo build",
+    "test": "echo test",
+    "lint": "echo lint",
+    "dev": "webpack --mode development"
   },
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
   }
 }
