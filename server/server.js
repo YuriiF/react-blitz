@@ -2,6 +2,7 @@
  * Server implemented with Polka micro server.
  * Polka is an extremely minimal, highly performant Express.js alternative.
  * URL: https://github.com/lukeed/polka
+ *
  */
 const path = require('path');
 const polka = require('polka');

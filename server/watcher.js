@@ -1,5 +1,8 @@
 /**
  * Watcher created with chokdir instead of nodemon.
+ * TODO: move utitilies functions, tinydate, serverLog,
+ * path resolution into separate folder
+ *
  */
 const chokdir = require('chokidar');
 const { join, resolve } = require('path');
