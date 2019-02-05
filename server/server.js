@@ -4,42 +4,46 @@
  * URL: https://github.com/lukeed/polka
  *
  */
-const path = require('path');
 const polka = require('polka');
-const serverLog = require('logdown')('server');
-const { join, resolve } = require('path');
-const { red, blue, green, yellow, magenta, bold } = require('kleur');
-const tinydate = require('tinydate');
-const watcher = require('./watcher');
+const { resolve } = require('path');
 
+/** Custom Import's */
+const logger = require('./utils/logger');
+const argv = require('./utils/argv');
+const port = require('./utils/port');
+const setup = require('./middlewares/frontendMiddleware');
+// const watcher = require('./watcher');
 
-const public = resolve(process.cwd(), 'public');
-const server = resolve(process.cwd(), 'server');
+const isDev = process.env.NODE_ENV !== 'production';
+const app = polka();
 
-const static = require('sirv')(public);
+/**
+ * In production we need to pass these values in instead of relying on webpack.
+ */
+setup(app, {
+  outputPath: resolve(process.cwd(), 'build'),
+  publicPath: '/',
+});
 
-const { PORT = 3000 } = process.env;
-serverLog.state.isEnabled = true;
-
-const timeFormat = tinydate('{HH}:{mm}:{ss}');
-
-function toTime() {
-  return '[' + magenta(timeFormat()) + ']: ';
-}
+/** get the intended host and port number, use localhost and port 3000 if not provided */
+const customHost = argv.host || process.env.HOST;
+/** Let http.Server use its default IPv6/4 host */
+const host = customHost || null;
+const prettyHost = customHost || 'localhost';
 
 /** TODO: Run the watcher only in development mode */
-watcher();
+// watcher();
 
-polka()
-  .use(static)
-  .get('*', (req, res, next) => {
-    res.end('OK');
-  })
-  .listen(PORT, (err) => {
-    if (err) {
-      throw err;
-    }
-    serverLog.log(`Running on: ${yellow(`http://localhost:${PORT}`)}`);
-    serverLog.log('Press *Ctrl+C* to quit.');
-    console.log(`   ${'-'.repeat(60)}`);
-  });
+app.get('*.js', (req, res, next) => {
+  req.url = req.url + '.gz';
+  res.setHeader('Content-Encoding', 'gzip');
+  next();
+});
+
+app.listen(port, host, (err) => {
+  if (err) {
+    return logger.error(err.message);
+  }
+
+  logger.appStarted(port, prettyHost);
+});
