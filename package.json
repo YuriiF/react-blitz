@@ -26,7 +26,7 @@
     "express": "^4.16.4",
     "ip": "^1.1.5",
     "kleur": "^3.0.1",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "polka": "^0.5.1",
     "prop-types": "^15.6.2",
     "rambda": "^2.3.1",
